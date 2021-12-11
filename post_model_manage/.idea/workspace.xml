@@ -4,47 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="630b37fd-90fe-4212-ab1e-1073c026d013" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../idl/external/inference.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../idl/external/management.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/api_test/management_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/management.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handler/get_model_states.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handler/get_models.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handler/remove_model.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handler/update_model_config.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/model_list.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/model_states.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc/inference.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc/management.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc/rpc_idl/torch_serve/inference.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc/rpc_idl/torch_serve/inference_grpc.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc/rpc_idl/torch_serve/management.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc/rpc_idl/torch_serve/management_grpc.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc/rpc_test/management_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/get_model_states.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/service_test/get_model_state_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../rpc_sdk/post_model_manage/post_model_manage.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../rpc_sdk/post_model_manage/post_model_manage_grpc.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../rpc_sdk/torch_serve/inference.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../rpc_sdk/torch_serve/inference_grpc.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../rpc_sdk/torch_serve/management.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../rpc_sdk/torch_serve/management_grpc.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sh/torch_serve_rpc.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../idl/post_model_manage.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../idl/post_model_manage.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/post_model_manage.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/post_model_manage.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/idl/post_model_manage.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/idl/post_model_manage/post_model_manage.pb.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/idl/post_model_manage_grpc.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/idl/post_model_manage/post_model_manage_grpc.pb.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sh/post_model_manage.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../sh/post_model_manage.sh" afterDir="false" />
-    </list>
+    <list default="true" id="630b37fd-90fe-4212-ab1e-1073c026d013" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -177,10 +137,10 @@
     </configuration>
     <list>
       <item itemvalue="Go Build.go build post_model_manage" />
-      <item itemvalue="Go Test.TestUpdateModelConfig in post_model_manage/rpc/rpc_test" />
       <item itemvalue="Go Test.TestGetModelState in post_model_manage/rpc/rpc_test" />
       <item itemvalue="Go Test.TestGetModelStates in post_model_manage/api/api_test" />
       <item itemvalue="Go Test.TestGetModelStates in post_model_manage/service/service_test" />
+      <item itemvalue="Go Test.TestUpdateModelConfig in post_model_manage/rpc/rpc_test" />
     </list>
     <recent_temporary>
       <list>
