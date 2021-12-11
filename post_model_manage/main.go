@@ -1,10 +1,12 @@
 package main
 
 import (
-	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
-	post_model_manage "post_model_manage/idl"
+
+	post_model_manage "post_model_manage/idl/post_model_manage"
+
+	"google.golang.org/grpc/reflection"
 
 	"google.golang.org/grpc"
 )
@@ -21,7 +23,7 @@ func main() {
 	}
 	s := grpc.NewServer()
 	reflection.Register(s)
-	post_model_manage.RegisterPostModelManageServer(s, &server{})
+	post_model_manage.RegisterPostModelManageServer(s, &Server{})
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)

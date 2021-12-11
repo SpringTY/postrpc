@@ -1,7 +1,8 @@
 # DELETE OUT
 # shellcheck disable=SC2034
-build_out=$(pwd)/out/
+build_out=$(pwd)/out/post_model_manage
 # delete output
 rm -r "$build_out"
 # BUILD
-go build -o "$build_out" -v -x
+# shellcheck disable=SC2035
+go build -o "$build_out" -v -x  *.go

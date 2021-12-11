@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/post_model_manage.iml" filepath="$PROJECT_DIR$/.idea/post_model_manage.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../.idea/postrpc.iml" filepath="$PROJECT_DIR$/../.idea/postrpc.iml" />
     </modules>
   </component>
 </project>

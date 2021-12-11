@@ -8,4 +8,4 @@ post_*: rpc各个模块服务Repo
 sdk: rpc服务sdk的生成
 sh: 更新、生成rpc服务和sdk的脚本
 ```
-
+grpcui -plaintext 211.71.76.189:7071
