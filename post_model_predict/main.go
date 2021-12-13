@@ -1,25 +1,30 @@
 package main
 
 import (
-	"context"
 	"log"
+	"net"
 
-	"github.com/go-redis/redis/v8"
+	post_model_predict "post_model_predict/idl/post_model_predict"
+
+	"google.golang.org/grpc/reflection"
+
+	"google.golang.org/grpc"
+)
+
+const (
+	port = ":50051"
 )
 
 func main() {
-	rdb := redis.NewClient(&redis.Options{
-		Addr: "211.71.76.189:6379",
-		DB:   0, // use default DB
-	})
-	ctx := context.Background()
-	val, err := rdb.Get(ctx, "test").Result()
-	if err == redis.Nil {
-		log.Fatalf("key not exits")
-	} else if err != nil {
-		log.Printf("err:%v", err)
-	} else {
-		log.Println(val)
+	lis, err := net.Listen("tcp", port)
+	if err != nil {
+		log.Fatalf("failed to listen: %v", err)
 	}
-
+	s := grpc.NewServer()
+	reflection.Register(s)
+	post_model_predict.RegisterPostModelPredictServer(s, &Server{})
+	log.Printf("server listening at %v", lis.Addr())
+	if err := s.Serve(lis); err != nil {
+		log.Fatalf("failed to serve: %v", err)
+	}
 }

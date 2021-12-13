@@ -3,6 +3,10 @@ APP_ID=post_model_manage
 
 # RPC 服务目录
 RPC_REPO_PATH=$REPO_DIR/$APP_ID/idl
+
+if [  ! -d $RPC_REPO_PATH ]; then
+  mkdir -p $RPC_REPO_PATH
+fi
 # RPC SDK目录
 CLIENT_PATH=$REPO_DIR/rpc_sdk
 

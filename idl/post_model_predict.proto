@@ -21,7 +21,7 @@ message PredictData{
 message PredictRequest{
   string modelName = 1;
   string modelVersion = 2;
-  repeated PredictData data = 3;
+  PredictData data = 3;
 }
 
 message PredictResponse{
@@ -34,7 +34,7 @@ message PredictResponse{
 message PredictAysncRequest{
   string modelName = 1;
   string modelVersion = 2;
-  repeated PredictData data = 3;
+  PredictData data = 3;
 }
 
 message PredictAysncData{
@@ -51,14 +51,17 @@ message PredictAysncResponse{
 message GetPredictAysncResultRequest{
   string taskId = 1;
 }
-
+message PredictAysncResult{
+  int32 status = 1;
+  repeated int32 order = 2;
+}
 message GetPredictAysncResultResponse{
   string message = 1;
   int32 status = 2;
-  PredictAysncData data = 3;
+  PredictAysncResult data = 3;
 }
 
-service PostModelManage{
+service PostModelPredict{
     rpc Predict (PredictRequest) returns (PredictResponse) {}
     rpc PredictAysnc(PredictAysncRequest) returns (PredictAysncResponse){}
     rpc GetPredictAysncResult(GetPredictAysncResultRequest) returns (GetPredictAysncResultResponse){}

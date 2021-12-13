@@ -26,5 +26,5 @@ sh build.sh
 ```bash
 grpcui -plaintext [host:port]
 # 例如
-grpcui -plaintext 211.71.76.189:7071
+grpcui -plaintext localhost:50051
 ```
