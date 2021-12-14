@@ -1,7 +1,10 @@
 package rpc
 
 import (
+	"log"
 	pb "post_model_manage/rpc/rpc_idl/torch_serve"
+
+	"google.golang.org/grpc"
 )
 
 const (
@@ -10,11 +13,11 @@ const (
 
 var inference_client pb.InferenceAPIsServiceClient
 
-//func init() {
-//	// Set up a connection to the server.
-//	conn, err := grpc.Dial(inference_address, grpc.WithInsecure(), grpc.WithBlock())
-//	if err != nil {
-//		log.Fatalf("did not connect: %v", err)
-//	}
-//	inference_client = pb.NewInferenceAPIsServiceClient(conn)
-//}
+func init() {
+	// Set up a connection to the server.
+	conn, err := grpc.Dial(inference_address, grpc.WithInsecure(), grpc.WithBlock())
+	if err != nil {
+		log.Fatalf("did not connect: %v", err)
+	}
+	inference_client = pb.NewInferenceAPIsServiceClient(conn)
+}

@@ -1,5 +1,5 @@
 REPO_DIR=$(dirname "$0")/..
-APP_ID=post_model_manage
+APP_ID=post_model_predict
 
 # RPC 服务目录
 RPC_REPO_PATH=$REPO_DIR/$APP_ID/idl
@@ -7,6 +7,7 @@ RPC_REPO_PATH=$REPO_DIR/$APP_ID/idl
 if [  ! -d $RPC_REPO_PATH ]; then
   mkdir -p $RPC_REPO_PATH
 fi
+
 # RPC SDK目录
 CLIENT_PATH=$REPO_DIR/rpc_sdk
 
