@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+option go_package="/post_data_manage";
+
+package post_data_manage;
+
+
+message GeneratePostPredictDataRequest{
+  string Tag = 1;
+}
+
+message GeneratePostPredictDataResponse{
+  string Message = 1;
+  int32 Status = 2;
+  string TaskId = 3;
+}
+
+message GetPostPredictTaskStatusRequest{
+  string TaskId = 1;
+}
+message PredictTaskStatus{
+  string Message = 1;
+  int32 Status = 2;
+  bool Finished = 3;
+}
+message GetPostPredictTaskStatusResponse{
+  string Message = 1;
+  int32 Status = 2;
+  PredictTaskStatus PredictTaskStatus = 3;
+}
+
+message GetPostPredictDataRequest{
+  int32 PageSize = 1;
+  int32 PageNum = 2;
+  string DealDate = 3;
+  string DealRegion = 4;
+}
+
+message Point{
+  repeated double features = 1;
+}
+
+message PredictDeal{
+  repeated Point Points = 1;
+  repeated int32 Order = 2;
+  int32 Start = 3;
+  int32 Length = 4;
+  string region = 5;
+  string deal_date = 6;
+}
+
+message PostPredictData{
+  repeated PredictDeal PredictDeals = 1;
+  // int32 total = 2;
+}
+
+message GetPostPredictDataResponse{
+  string Message = 1;
+  int32 Status = 2;
+  PostPredictData PostPredictData = 3;
+}
+
+
+service PostDataManage{
+    rpc GeneratePostPredictData (GeneratePostPredictDataRequest) returns (GeneratePostPredictDataResponse) {}
+    rpc GetPostPredictData (GetPostPredictDataRequest) returns (GetPostPredictDataResponse) {}
+}
