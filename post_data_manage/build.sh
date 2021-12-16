@@ -1,8 +1,10 @@
 # DELETE OUT
 # shellcheck disable=SC2034
-build_out=$(dirname $(readlink -f "$0"))/out/post_model_manage
+build_out=$(dirname $(readlink -f "$0"))/out/post_data_manage
 # delete output
-rm -r "$build_out"
+# if [ ! -f "$build_out" ];then
+#     rm "$build_out"
+# fi
 # BUILD
 # shellcheck disable=SC2035
-go build -o "$build_out" -v -x  *.go
+go build -o "$build_out"   *.go
