@@ -5,65 +5,61 @@ import (
 	"log"
 	"post_data_manage/idl/post_data_manage"
 	"post_data_manage/model"
-	"post_data_manage/mongo"
+	"post_data_manage/mq"
+	"post_data_manage/mysql"
+	"post_data_manage/util"
+	"time"
 )
 
-type GetPostPredictDataHandler struct {
-	Request  *post_data_manage.GetPostPredictDataRequest
-	Response *post_data_manage.GetPostPredictDataResponse
+type GeneratePostPredictDataHandler struct {
+	Request  *post_data_manage.GeneratePostPredictDataRequest
+	Response *post_data_manage.GeneratePostPredictDataResponse
 	Ctx      context.Context
 }
 
-func NewGetPostPredictDataHandler(Ctx context.Context, Request *post_data_manage.GetPostPredictDataRequest) *GetPostPredictDataHandler {
-	return &GetPostPredictDataHandler{
+func NewGeneratePostPredictDataHandler(Ctx context.Context, Request *post_data_manage.GeneratePostPredictDataRequest) *GeneratePostPredictDataHandler {
+	return &GeneratePostPredictDataHandler{
 		Request: Request,
 		Ctx:     Ctx,
-		Response: &post_data_manage.GetPostPredictDataResponse{
-			Message:         "success",
-			Status:          0,
-			PostPredictData: &post_data_manage.PostPredictData{},
+		Response: &post_data_manage.GeneratePostPredictDataResponse{
+			Message: "success",
+			Status:  0,
+			TaskId:  "",
 		},
 	}
 }
-func (h *GetPostPredictDataHandler) Run() {
-	mongoPostPredict, err := h.GetPostPredictData()
+func (h *GeneratePostPredictDataHandler) Run() {
+	task := h.BuidTask()
+	err := h.SendTask(task)
 	if err != nil {
-		log.Printf("[GetPostPredictDataHandler] error call GetPostPredictData, err: %v", err)
-		h.Response.Message = "error"
+		log.Printf("[GeneratePostPredictDataHandler] error call SendTask,err: %v", err)
 		h.Response.Status = 1
+		h.Response.Message = "error"
 		return
 	}
-	rpcPredictData := h.ConvertPostPredictFromMongoToRpc(mongoPostPredict)
-	h.Response.PostPredictData.PredictDeals = rpcPredictData
+	h.Response.TaskId = task.TaskID
+	err = h.BuildResult(task.TaskID)
+	if err != nil {
+		log.Printf("[GeneratePostPredictDataHandler] error call SendTask,err: %v", err)
+	}
 }
 
-func (h *GetPostPredictDataHandler) CheckParam() error {
+func (h *GeneratePostPredictDataHandler) CheckParam() error {
 	return nil
 }
-
-func (h *GetPostPredictDataHandler) GetPostPredictData() ([]*model.PostPredict, error) {
-	return mongo.GetPostPredictDeal(h.Ctx, h.Request.DealDate, h.Request.DealRegion, int64(h.Request.PageSize), int64(h.Request.PageNum))
-}
-func (h *GetPostPredictDataHandler) ConvertPostPredictFromMongoToRpc(mongoPredictDeals []*model.PostPredict) []*post_data_manage.PredictDeal {
-	var rpcPredictDeals []*post_data_manage.PredictDeal
-	for _, mongoDeal := range mongoPredictDeals {
-		var order []int32
-		var points []*post_data_manage.Point
-		for i := 0; i < mongoDeal.Length; i++ {
-			order = append(order, int32(mongoDeal.Order[i]))
-			points = append(points, &post_data_manage.Point{
-				Features: mongoDeal.Points[i],
-			})
-		}
-		rpcPredictDeal := &post_data_manage.PredictDeal{
-			Points:   points,
-			Order:    order,
-			Start:    int32(mongoDeal.Start),
-			Length:   int32(mongoDeal.Length),
-			Region:   mongoDeal.Region,
-			DealDate: mongoDeal.DealDate,
-		}
-		rpcPredictDeals = append(rpcPredictDeals, rpcPredictDeal)
+func (h *GeneratePostPredictDataHandler) BuidTask() (task *model.GeneratePredictDataTask) {
+	return &model.GeneratePredictDataTask{
+		TaskID:  util.GetUUID(),
+		TaskTag: h.Request.Tag,
 	}
-	return rpcPredictDeals
+}
+func (h *GeneratePostPredictDataHandler) SendTask(task *model.GeneratePredictDataTask) error {
+	return mq.SendGeneratePredictDataTask(h.Ctx, task)
+}
+func (h *GeneratePostPredictDataHandler) BuildResult(taskId string) error {
+	return mysql.CreateTask(h.Ctx, &model.PostTask{
+		PostTaskId:     taskId,
+		PostTaskDate:   time.Now(),
+		PostTaskStatus: 1, //
+	})
 }

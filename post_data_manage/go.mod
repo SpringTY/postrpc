@@ -8,14 +8,19 @@ require (
 	go.mongodb.org/mongo-driver v1.8.1
 	google.golang.org/grpc v1.43.0
 	google.golang.org/protobuf v1.27.1
+	gorm.io/driver/mysql v1.2.1
+	gorm.io/gorm v1.22.4
 )
 
 require (
 	github.com/emirpasic/gods v1.12.0 // indirect
+	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/golang/mock v1.3.1 // indirect
 	github.com/golang/protobuf v1.5.0 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.3 // indirect
 	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/konsorten/go-windows-terminal-sequences v1.0.1 // indirect

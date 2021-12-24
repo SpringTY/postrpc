@@ -14,6 +14,7 @@ var (
 	err             error
 	db              *mongo.Database
 	postPredictDeal *mongo.Collection
+	postRawDeal     *mongo.Collection
 )
 
 func init() {
@@ -28,4 +29,5 @@ func init() {
 
 	//3.选择表 my_collection
 	postPredictDeal = db.Collection("post_predict")
+	postRawDeal = db.Collection("post_deal")
 }
