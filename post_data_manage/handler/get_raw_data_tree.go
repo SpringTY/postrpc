@@ -84,7 +84,7 @@ func (h *GetRawDataTreeHandler) BuildResp(m map[string][]string) {
 	}
 	root := &post_data_manage.RawDataTreeNode{
 		Label: "MongoDB",
-		Value: "root",
+		Value: "MongoDB",
 		Child: children,
 	}
 	h.Response.Tree.Root = root
