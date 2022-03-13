@@ -84,9 +84,19 @@ message UpdateModelConfigResponse {
   int32 status = 2;
 }
 
+message RegisterModelRequest{
+  string url = 1;
+}
+
+message RegisterModelResponse{
+  string message = 1;
+  int32 status = 2;
+}
+
 service PostModelManage{
     rpc GetModels (GetModelsRequest) returns (GetModelsResponse) {}
     rpc RemoveModel (RemoveModelRequest) returns (RemoveModelResponse) {}
     rpc UpdateModelConfig (UpdateModelConfigRequest) returns (UpdateModelConfigResponse) {}
     rpc GetModelStates(GetModelStatesRequest) returns (GetModelStatesResponse) {}
+    rpc RegisterModel(RegisterModelRequest) returns (RegisterModelResponse){}
 }
