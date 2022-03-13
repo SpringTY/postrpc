@@ -4,6 +4,7 @@ import (
 	"log"
 	"net"
 
+	"post_model_manage/consts"
 	post_model_manage "post_model_manage/idl/post_model_manage"
 
 	"google.golang.org/grpc/reflection"
@@ -16,6 +17,7 @@ const (
 )
 
 func main() {
+	consts.Init()
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)

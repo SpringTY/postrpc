@@ -4,11 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"google.golang.org/grpc"
 	"log"
 	"post_model_manage/idl/post_model_manage"
 	"post_model_manage/model"
 	pb "post_model_manage/rpc/rpc_idl/torch_serve"
+
+	"google.golang.org/grpc"
 )
 
 const (
@@ -24,6 +25,21 @@ func init() {
 		log.Fatalf("did not connect: %v", err)
 	}
 	management_client = pb.NewManagementAPIsServiceClient(conn)
+}
+
+func RegisterModel(ctx context.Context, modelUrl, modelName string) (string, error) {
+	req := &pb.RegisterModelRequest{
+		InitialWorkers: 1,
+		ModelName:      modelName,
+		Synchronous:    false, //是否是同步加载,我们选择异步加载
+		Url:            modelUrl,
+	}
+	resp, err := management_client.RegisterModel(ctx, req)
+	if err != nil {
+		log.Printf("[Error] Error call rpc RegisterModel, err: %v", err)
+		return err.Error(), err
+	}
+	return resp.Msg, nil
 }
 
 func GetModelList(ctx context.Context) (*model.ModelListResponse, error) {
@@ -75,7 +91,7 @@ func UpdateModelConfig(ctx context.Context, modelName, modelVersion string, maxW
 
 func GetModelStateById(ctx context.Context, id *post_model_manage.ModelIdentity) ([]*model.ModelState, error) {
 	req := &pb.DescribeModelRequest{
-		ModelName:    id.ModelName,
+		ModelName: id.ModelName,
 	}
 	describeModel, err := management_client.DescribeModel(ctx, req)
 	if err != nil {
@@ -109,5 +125,3 @@ func GetModelStatesByIds(ctx context.Context, identities []*post_model_manage.Mo
 	}
 	return modelStates, nil
 }
-
-
