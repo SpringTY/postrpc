@@ -3,7 +3,6 @@ package handler
 import (
 	"context"
 	"fmt"
-	"log"
 	"post_model_manage/consts"
 	"post_model_manage/idl/post_model_manage"
 	"post_model_manage/rpc"
