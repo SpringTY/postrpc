@@ -22,6 +22,7 @@ type PostModelManageClient interface {
 	RemoveModel(ctx context.Context, in *RemoveModelRequest, opts ...grpc.CallOption) (*RemoveModelResponse, error)
 	UpdateModelConfig(ctx context.Context, in *UpdateModelConfigRequest, opts ...grpc.CallOption) (*UpdateModelConfigResponse, error)
 	GetModelStates(ctx context.Context, in *GetModelStatesRequest, opts ...grpc.CallOption) (*GetModelStatesResponse, error)
+	RegisterModel(ctx context.Context, in *RegisterModelRequest, opts ...grpc.CallOption) (*RegisterModelResponse, error)
 }
 
 type postModelManageClient struct {
@@ -68,6 +69,15 @@ func (c *postModelManageClient) GetModelStates(ctx context.Context, in *GetModel
 	return out, nil
 }
 
+func (c *postModelManageClient) RegisterModel(ctx context.Context, in *RegisterModelRequest, opts ...grpc.CallOption) (*RegisterModelResponse, error) {
+	out := new(RegisterModelResponse)
+	err := c.cc.Invoke(ctx, "/post_model_manage.PostModelManage/RegisterModel", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PostModelManageServer is the server API for PostModelManage service.
 // All implementations must embed UnimplementedPostModelManageServer
 // for forward compatibility
@@ -76,6 +86,7 @@ type PostModelManageServer interface {
 	RemoveModel(context.Context, *RemoveModelRequest) (*RemoveModelResponse, error)
 	UpdateModelConfig(context.Context, *UpdateModelConfigRequest) (*UpdateModelConfigResponse, error)
 	GetModelStates(context.Context, *GetModelStatesRequest) (*GetModelStatesResponse, error)
+	RegisterModel(context.Context, *RegisterModelRequest) (*RegisterModelResponse, error)
 	mustEmbedUnimplementedPostModelManageServer()
 }
 
@@ -94,6 +105,9 @@ func (UnimplementedPostModelManageServer) UpdateModelConfig(context.Context, *Up
 }
 func (UnimplementedPostModelManageServer) GetModelStates(context.Context, *GetModelStatesRequest) (*GetModelStatesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetModelStates not implemented")
+}
+func (UnimplementedPostModelManageServer) RegisterModel(context.Context, *RegisterModelRequest) (*RegisterModelResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterModel not implemented")
 }
 func (UnimplementedPostModelManageServer) mustEmbedUnimplementedPostModelManageServer() {}
 
@@ -180,6 +194,24 @@ func _PostModelManage_GetModelStates_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PostModelManage_RegisterModel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterModelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PostModelManageServer).RegisterModel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/post_model_manage.PostModelManage/RegisterModel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PostModelManageServer).RegisterModel(ctx, req.(*RegisterModelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PostModelManage_ServiceDesc is the grpc.ServiceDesc for PostModelManage service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -202,6 +234,10 @@ var PostModelManage_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetModelStates",
 			Handler:    _PostModelManage_GetModelStates_Handler,
+		},
+		{
+			MethodName: "RegisterModel",
+			Handler:    _PostModelManage_RegisterModel_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
