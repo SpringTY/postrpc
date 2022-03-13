@@ -47,7 +47,7 @@ func (h *RegisterModelHandler) getModelName() string {
 	modelName := ""
 	marName := ""
 	if consts.HttpMarRegexp.Match([]byte(modelUrl)) {
-		httpPath := strings.Split(modelUrl, "\\")
+		httpPath := strings.Split(modelUrl, "/")
 		marName = httpPath[len(httpPath)-1]
 	} else {
 		marName = modelUrl
